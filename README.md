@@ -55,8 +55,6 @@ npm run dev --workspace frontend
 
 ## Testes
 
-O primeiro teste unitário cobre a página `hello_world`:
-
 ```bash
 npm run test --workspace frontend
 ```
