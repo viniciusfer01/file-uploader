@@ -6,7 +6,7 @@
     "build": "nest build",
     "start": "nest start",
     "dev": "nest start --watch",
-    "test": "node -e \"console.log('No backend unit tests configured yet.')\"",
+    "test": "vitest run",
     "lint": "tsc --noEmit",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init"
@@ -33,7 +33,7 @@
     "@types/node": "^22.14.1",
     "prisma": "^6.6.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }
-

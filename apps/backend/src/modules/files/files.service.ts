@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { normalizeUploadedFilename } from './file-name.util';
 import { PrismaService } from '../prisma/prisma.service';
 import { StorageService } from '../storage/storage.service';
 
@@ -16,11 +17,13 @@ export class FilesService {
       throw new BadRequestException('Unsupported file type.');
     }
 
+    const normalizedName = normalizeUploadedFilename(file.originalname);
+    file.originalname = normalizedName;
     const url = await this.storageService.upload(file);
 
     return this.prismaService.fileRecord.create({
       data: {
-        name: file.originalname,
+        name: normalizedName,
         type: file.mimetype,
         size: file.size,
         url,

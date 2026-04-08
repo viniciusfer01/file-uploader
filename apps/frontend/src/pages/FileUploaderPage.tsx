@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { api } from '../services/api';
 import { FileRecord } from '../types/file';
 
-const acceptedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+export const acceptedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
 
 export function FileUploaderPage() {
   const [files, setFiles] = useState<FileRecord[]>([]);
@@ -79,12 +79,22 @@ export function FileUploaderPage() {
             lista para preview ou download.
           </p>
 
-          <label className="mt-8 flex cursor-pointer flex-col items-center justify-center rounded-3xl border border-dashed border-teal-300 bg-teal-50 px-6 py-12 text-center transition hover:border-teal-500 hover:bg-teal-100">
+          <label
+            className="mt-8 flex cursor-pointer flex-col items-center justify-center rounded-3xl border border-dashed border-teal-300 bg-teal-50 px-6 py-12 text-center transition hover:border-teal-500 hover:bg-teal-100"
+            htmlFor="file-upload-input"
+          >
             <span className="text-lg font-semibold text-teal-900">
               {uploading ? 'Enviando arquivo...' : 'Selecionar imagem ou PDF'}
             </span>
             <span className="mt-2 text-sm text-teal-800">Tipos aceitos: JPG, PNG e PDF.</span>
-            <input className="hidden" type="file" accept=".jpg,.jpeg,.png,.pdf" onChange={handleUpload} />
+            <input
+              aria-label="Selecionar arquivo para upload"
+              className="hidden"
+              id="file-upload-input"
+              type="file"
+              accept=".jpg,.jpeg,.png,.pdf"
+              onChange={handleUpload}
+            />
           </label>
 
           {error ? (
@@ -183,4 +193,3 @@ export function FileUploaderPage() {
     </main>
   );
 }
-
