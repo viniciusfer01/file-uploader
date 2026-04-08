@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/pages/fileuploaderpage.tsx","./src/pages/helloworldpage.spec.tsx","./src/pages/helloworldpage.tsx","./src/services/api.ts","./src/test/setup.ts","./src/types/file.ts","./vite.config.ts"],"version":"5.9.3"}
