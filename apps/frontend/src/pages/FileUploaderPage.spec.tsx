@@ -1,5 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
+import { AuthProvider } from '../auth/AuthContext';
 import { FileUploaderPage } from './FileUploaderPage';
 import { api } from '../services/api';
 import { FileRecord } from '../types/file';
@@ -13,6 +15,22 @@ vi.mock('../services/api', () => ({
 
 const mockedGet = vi.mocked(api.get);
 const mockedPost = vi.mocked(api.post);
+
+function renderPage() {
+  window.localStorage.setItem('file-uploader.auth.token', 'signed-token');
+  window.localStorage.setItem(
+    'file-uploader.auth.user',
+    JSON.stringify({ email: 'admin@example.com' }),
+  );
+
+  return render(
+    <AuthProvider>
+      <MemoryRouter>
+        <FileUploaderPage />
+      </MemoryRouter>
+    </AuthProvider>,
+  );
+}
 
 function createRecord(overrides: Partial<FileRecord> = {}): FileRecord {
   return {
@@ -28,6 +46,7 @@ function createRecord(overrides: Partial<FileRecord> = {}): FileRecord {
 
 describe('FileUploaderPage', () => {
   beforeEach(() => {
+    window.localStorage.clear();
     vi.clearAllMocks();
     mockedGet.mockResolvedValue({ data: [] } as never);
   });
@@ -46,7 +65,7 @@ describe('FileUploaderPage', () => {
 
     mockedPost.mockResolvedValueOnce({ data: uploaded } as never);
 
-    render(<FileUploaderPage />);
+    renderPage();
 
     const input = await screen.findByLabelText(/selecionar arquivo para upload/i);
     const file = new File(['file-bytes'], fileName, { type: mimeType });
@@ -83,7 +102,7 @@ describe('FileUploaderPage', () => {
   });
 
   it('rejects an unsupported file type before calling the API', async () => {
-    render(<FileUploaderPage />);
+    renderPage();
 
     const input = await screen.findByLabelText(/selecionar arquivo para upload/i);
     const file = new File(['hello'], 'notes.txt', { type: 'text/plain' });
@@ -110,7 +129,7 @@ describe('FileUploaderPage', () => {
       ],
     } as never);
 
-    render(<FileUploaderPage />);
+    renderPage();
 
     expect(await screen.findByText('avatar.png')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'avatar.png' })).toBeInTheDocument();

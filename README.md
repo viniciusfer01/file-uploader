@@ -24,6 +24,11 @@ Serviços:
 - Backend: `http://localhost:3000/api`
 - MinIO Console: `http://localhost:9001`
 
+### Login padrão
+
+- Email: `admin@example.com`
+- Senha: `supersecret`
+
 ## Desenvolvimento local
 
 Instale as dependências:
@@ -57,5 +62,11 @@ npm run dev --workspace frontend
 
 ```bash
 npm run test --workspace frontend
+npm run test --workspace backend
 ```
 
+## Fluxo autenticado
+
+- `POST /api/auth/login`: autentica com email e senha e retorna o token
+- `GET /api/files`: rota protegida por bearer token
+- `POST /api/files`: rota protegida por bearer token

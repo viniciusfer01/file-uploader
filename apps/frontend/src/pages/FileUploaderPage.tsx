@@ -1,10 +1,12 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { useAuth } from '../auth/AuthContext';
 import { api } from '../services/api';
 import { FileRecord } from '../types/file';
 
 export const acceptedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
 
 export function FileUploaderPage() {
+  const { logout, userEmail } = useAuth();
   const [files, setFiles] = useState<FileRecord[]>([]);
   const [selectedFileId, setSelectedFileId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -78,6 +80,18 @@ export function FileUploaderPage() {
             A API envia arquivos para um bucket S3 compatível, salva apenas a URL e exibe a
             lista para preview ou download.
           </p>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-slate-100 px-4 py-3">
+            <p className="text-sm text-slate-600">
+              Sessao autenticada como <span className="font-semibold text-slate-900">{userEmail}</span>
+            </p>
+            <button
+              className="rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-white"
+              onClick={logout}
+              type="button"
+            >
+              Sair
+            </button>
+          </div>
 
           <label
             className="mt-8 flex cursor-pointer flex-col items-center justify-center rounded-3xl border border-dashed border-teal-300 bg-teal-50 px-6 py-12 text-center transition hover:border-teal-500 hover:bg-teal-100"
