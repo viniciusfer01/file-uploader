@@ -1,5 +1,7 @@
 # File Uploader
 
+## [Link de acesso ao projeto na nuvem:] (http://e13oryrrm24j8zixlpisacl0.187.127.19.206.sslip.io)
+
 Monorepo fullstack com:
 
 - `apps/backend`: API NestJS + Prisma + PostgreSQL + upload para MinIO/S3
@@ -27,7 +29,7 @@ Serviços:
 ### Login padrão
 
 - Email: `admin@example.com`
-- Senha: `supersecret`
+- Senha: `minha-senha-forte`
 
 ## Desenvolvimento local
 
