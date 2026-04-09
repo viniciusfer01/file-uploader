@@ -1,6 +1,6 @@
 # File Uploader
 
-## [Link de acesso ao projeto na nuvem:] (http://e13oryrrm24j8zixlpisacl0.187.127.19.206.sslip.io)
+## Link para acesso ao projeto na nuvem: (http://e13oryrrm24j8zixlpisacl0.187.127.19.206.sslip.io)
 
 Monorepo fullstack com:
 
